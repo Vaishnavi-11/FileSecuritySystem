@@ -1,0 +1,2 @@
+/home/user/;root@123
+/home/user/Desktop/project/sam1.txt;root@sam
