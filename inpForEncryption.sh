@@ -1,7 +1,6 @@
 #!/bin/bash
 echo "Enter the absolute path of the file:"
 read path
-echo "$path"
 password=""
 echo "Enter the password"
 read password
