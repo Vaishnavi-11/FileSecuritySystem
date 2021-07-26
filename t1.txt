@@ -1,2 +1,2 @@
-/home/user/;root@123
-/home/user/Desktop/project/sam1.txt;root@sam
+/home/user/Desktop/project/encryption.sh_hi
+/home/user/Desktop/play/bq.sh_jkl
