@@ -6,15 +6,19 @@ read pathname
 if [ -f "$pathname" ]
 then
 	count=$( grep -c "$pathname" t1.txt )
-	if [ $count == 1 ]
+	echo $count
+	if [ $count -eq 1 ]
 	then
 		echo "Enter Password"
 		read password
-		valid=$( grep -c "$pathname_$password" t1.txt)
-		if [ $valid == 1 ]
+		valid=$( grep -c "$pathname-$password" t1.txt)
+		line=$( grep -n "$pathname-$password" t1.txt  | grep -Eo '^[^:]+') 
+		echo $line
+		if [ $valid -eq 1 ]
 		then
 			#decryption of the file
 			echo "Your file has been decrypted"
+			sed -i "${line}d" t1.txt
 		else
 			echo "Invalid password"
 		fi
