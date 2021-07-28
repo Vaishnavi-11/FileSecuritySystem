@@ -5,13 +5,13 @@ opt=$(zenity --list --title="Encryption or Decryption" --radiolist --column "Cho
 if [ $opt = 'Encryption' ]
 then 
   zenity --notification --text "You chose Encryption"
-  sh encryp.sh
+  sh encryp_edit.sh
 fi
 
 if [ $opt = 'Decryption' ]
 then 
   zenity --notification --text "You chose Decryption"
-  sh decryp.sh
+  sh decryp_edit.sh
 fi
 
 

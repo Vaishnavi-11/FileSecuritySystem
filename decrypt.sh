@@ -4,10 +4,7 @@ path="$1"
 file=""
 touch temp.txt
 key=`cat $path | wc -l`
-#echo "Enter key"
-#read key
-#key=$((key+1))
-echo $key
+#echo $key
 
 while IFS= read -r line
 do
@@ -33,4 +30,5 @@ do
 	echo $file >> temp.txt
 	file=""
 done < "$path"
+chmod u+w $path 
 mv temp.txt $path

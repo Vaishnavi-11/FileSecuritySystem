@@ -1,10 +1,11 @@
 #!/bin/bash
 
 path="$1"
+#echo $path
 file=""
 
 key=`cat $path | wc -l`
-echo "Key of the file $path is $key"
+#echo "Key of the file $path is $key"
 touch temp.txt
 while IFS= read -r line
 do
@@ -26,4 +27,4 @@ do
 	file=""
 done < "$path"
 mv temp.txt $path
-
+chmod a-w $path

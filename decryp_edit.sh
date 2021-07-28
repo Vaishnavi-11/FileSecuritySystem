@@ -1,37 +1,39 @@
 #!/bin/sh
-      name=$(zenity --file-selection --filename="/home/yash/ProjectUSP/") 
+      name=$(zenity --file-selection --filename="/home/vaishnavi/BMSCE/USP/Linux_Project/") 
 
 
-	count=$( grep -c "$name" hello.txt )
+	count=$( grep -c "$name" shared_file.txt )
 	#echo $count
        if [ $count -eq 1 ]
 	then
-	   pass=$(zenity --password)
-	   valid=$( grep -c "$name--$pass" hello.txt)
+	   pass=$(zenity --password --title="Enter password")
+	   valid=$( grep -c "$name-$pass" shared_file.txt)
 	   #echo $line
 	    echo $valid
 	   if [ $valid -eq 1 ]
 	   then
-	     line=$( grep -n "$name--$pass" hello.txt  | grep -Eo '^[^:]+') 
+	     line=$( grep -n "$name-$pass" shared_file.txt  | grep -Eo '^[^:]+') 
 	     #decryption of the file
 	      
-	     sh decrypt.sh
+	     ./decrypt.sh $name
+	     zenity --info --text="File decrypted successfully" --height=200 --width=500
 	     #echo "Your file has been decrypted"
-	     sed -i "${line}d" hello.txt
+	     sed -i "${line}d" shared_file.txt
 	   else
 	     zenity --error --text="Invalid password" --height=200 --width=500
-	     pass1=$(zenity --password --text="Re-enter password")
-	     valid1=$( grep -c "$name--$pass1" hello.txt)
+	     pass1=$(zenity --password --title="Re-enter password")
+	     valid1=$( grep -c "$name-$pass1" shared_file.txt)
 	     #echo $line
 	     echo $valid1
 	     if [ $valid1 -eq 1 ]
 	     then
-	       line1=$( grep -n "$name--$pass1" hello.txt  | grep -Eo '^[^:]+') 
+	       line1=$( grep -n "$name-$pass1" shared_file.txt  | grep -Eo '^[^:]+') 
 	     #decryption of the file
 	      
-	     sh decrypt.sh
+	     ./decrypt.sh $name
+	     zenity --info --text="File decrypted successfully" --height=200 --width=500
 	     #echo "Your file has been decrypted"
-	     sed -i "${line1}d" hello.txt
+	     sed -i "${line1}d" shared_file.txt
 	     else
 	       zenity --error --text="Invalid password" --height=200 --width=500
 	     
