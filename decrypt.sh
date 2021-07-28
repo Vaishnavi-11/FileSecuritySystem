@@ -2,22 +2,35 @@
 
 path="$1"
 file=""
-
-echo "Enter key"
-read key
+touch temp.txt
+key=`cat $path | wc -l`
+#echo "Enter key"
+#read key
+#key=$((key+1))
 echo $key
 
-while IFS= read -r -n1 char
+while IFS= read -r line
 do
-	ascii=$(printf "%d" "'$char")	
-	if [ $ascii -lt $key ]
-	then
-		sub=`expr $key - $ascii`
-	else
-		sub=`expr $ascii - $key`
-	fi
-	convert=$((sub%128))
-	ch=$(printf "\x$(printf %x $convert)")
-	file+="$ch"
+	for (( i=0; i<${#line}; i++ ));
+	do
+		char=${line:$i:1}
+		ascii=$(printf "%d" "'$char")
+		if [ $ascii -ge 0 ] && [ $ascii -lt 32 ]
+		then
+			file+=$char
+			continue
+		else
+			if [ $ascii -lt $key ]
+			then
+				sub=`expr $key - $ascii`
+			else
+				sub=`expr $ascii - $key`
+			fi
+			ch=$(printf "\x$(printf %x $sub)")
+			file+="$ch"
+		fi
+	done
+	echo $file >> temp.txt
+	file=""
 done < "$path"
-echo $file > $path
+mv temp.txt $path
